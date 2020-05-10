@@ -1,0 +1,1 @@
+final url_api = 'https://rewards.disolutionsmx.com/api';

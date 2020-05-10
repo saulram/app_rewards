@@ -10,17 +10,21 @@ String userToJson(User data) => json.encode(data.toJson());
 
 class User {
     UserClass user;
+    String token;
 
     User({
         this.user,
+        this.token,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         user: UserClass.fromJson(json["user"]),
+        token: json["token"],
     );
 
     Map<String, dynamic> toJson() => {
         "user": user.toJson(),
+        "token": token,
     };
 }
 
