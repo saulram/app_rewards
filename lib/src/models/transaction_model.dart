@@ -16,6 +16,8 @@ class Transaction {
   String transaction;
   int totalPoints;
   int v;
+  Stablishments stablishments;
+  String transactionId;
 
   Transaction({
     this.id,
@@ -25,6 +27,8 @@ class Transaction {
     this.transaction,
     this.totalPoints,
     this.v,
+    this.stablishments,
+    this.transactionId,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
@@ -35,6 +39,8 @@ class Transaction {
     transaction: json["transaction"],
     totalPoints: json["total_points"],
     v: json["__v"],
+    stablishments: Stablishments.fromJson(json["stablishments"]),
+    transactionId: json["id"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +50,52 @@ class Transaction {
     "user_email": userEmail,
     "transaction": transaction,
     "total_points": totalPoints,
+    "__v": v,
+    "stablishments": stablishments.toJson(),
+    "id": transactionId,
+  };
+}
+
+class Stablishments {
+  String id;
+  String name;
+  String description;
+  String categories;
+  String location;
+  String url;
+  String image;
+  int v;
+
+  Stablishments({
+    this.id,
+    this.name,
+    this.description,
+    this.categories,
+    this.location,
+    this.url,
+    this.image,
+    this.v,
+  });
+
+  factory Stablishments.fromJson(Map<String, dynamic> json) => Stablishments(
+    id: json["_id"],
+    name: json["name"],
+    description: json["description"],
+    categories: json["categories"],
+    location: json["location"],
+    url: json["url"],
+    image: json["image"],
+    v: json["__v"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "_id": id,
+    "name": name,
+    "description": description,
+    "categories": categories,
+    "location": location,
+    "url": url,
+    "image": image,
     "__v": v,
   };
 }
