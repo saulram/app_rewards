@@ -30,7 +30,7 @@ class TransactionPage extends StatelessWidget {
             maxRadius: MediaQuery.of(context).size.width * .2,
             backgroundColor: Colors.black,
             backgroundImage: NetworkImage(
-                'https://rewards.disolutionsmx.com/api/get-user-image/${userService.user.user.profilePic}'),
+              userService.user.user.profilePic != null ? 'https://rewards.disolutionsmx.com/api/get-user-image/${userService.user.user.profilePic}':'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/86811916/original/5d2499b138522f3486159269b72ca2c7d5ea86f1/illustrate-an-amazing-flat-avatar-for-you.jpg'),
           ),
         ),
       ),

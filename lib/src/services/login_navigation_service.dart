@@ -14,6 +14,10 @@ class LoginServiceNavigator with ChangeNotifier {
   }
   final GlobalKey<FormBuilderState> _formLogin = GlobalKey<FormBuilderState>();
   GlobalKey<FormBuilderState> get loginform => _formLogin;
+
+  final GlobalKey<FormBuilderState> _fomrRegister = GlobalKey<FormBuilderState>();
+  GlobalKey<FormBuilderState> get registerForm => _fomrRegister;
+
   bool _showPassword = true;
   bool get showPassword => _showPassword;
   set showpassword ( bool updatedstatus){

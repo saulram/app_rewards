@@ -3,6 +3,7 @@ import 'package:apprewards/src/components/beloni_neucard.dart';
 import 'package:apprewards/src/components/beloni_neucircle.dart';
 import 'package:apprewards/src/services/transaction_service.dart';
 import 'package:apprewards/src/theme/theme.dart';
+import 'package:apprewards/src/utils/globals.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -62,8 +63,9 @@ class TransactionList extends StatelessWidget {
                                           MediaQuery.of(context).size.width *
                                               .005),
                                       child: CircleAvatar(
+                                        backgroundColor: whiteBg,
                                         backgroundImage: NetworkImage(
-                                            'https://clubdeciencia.mx/images/teasers/wingstopconv01.jpg'),
+                                            '$url_api/get-place-image/${transactionService.userTransactions[backwards].stablishments.image}'),
                                       ),
                                     ),
                                   ),
@@ -79,7 +81,7 @@ class TransactionList extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         AutoSizeText(
-                                          '${transactionService.userTransactions[backwards].establishment}',
+                                          '${transactionService.userTransactions[backwards].stablishments.name}',
                                           maxFontSize: 14,
                                           minFontSize: 5,
                                           maxLines: 1,
