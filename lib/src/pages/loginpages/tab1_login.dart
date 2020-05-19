@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:apprewards/src/components/beloni_button.dart';
 import 'package:apprewards/src/services/login_navigation_service.dart';
 import 'package:apprewards/src/services/user_service.dart';
+import 'package:apprewards/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -12,7 +14,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Tab1Login extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class Tab1Login extends StatelessWidget {
     final navigationService = Provider.of<LoginServiceNavigator>(context);
 
     return Scaffold(
-      key: _scaffoldkey,
+      backgroundColor: whiteBg,
       resizeToAvoidBottomPadding: true,
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
@@ -89,13 +90,13 @@ class Tab1Login extends StatelessWidget {
                                 padding: EdgeInsets.all(5),
                                 boxShape: NeumorphicBoxShape.stadium(),
                                 style: NeumorphicStyle(
-                                  lightSource: LightSource(-2, -2.5),
-                                  shadowLightColor: Colors.grey[100],
-                                  shadowLightColorEmboss: Colors.white,
-                                  depth: -1,
-                                  intensity: .8,
+                                  lightSource: LightSource(-1, -1),
+                                  shadowLightColor: Color(0xff989898),
+                                  depth: -3,
+                                  intensity: 1,
                                   surfaceIntensity: 1,
-                                  color: Colors.white,
+                                  oppositeShadowLightSource: false,
+                                  color: whiteBg,
                                 ),
                                 child: FormBuilderTextField(
                                   attribute: "email",
@@ -126,13 +127,13 @@ class Tab1Login extends StatelessWidget {
                                 padding: EdgeInsets.all(5),
                                 boxShape: NeumorphicBoxShape.stadium(),
                                 style: NeumorphicStyle(
-                                  lightSource: LightSource(-2, -2.5),
-                                  shadowLightColor: Colors.grey[100],
-                                  shadowLightColorEmboss: Colors.white,
-                                  depth: -1,
-                                  intensity: .8,
+                                  lightSource: LightSource(-1, -1),
+                                  shadowLightColor: Color(0xff989898),
+                                  depth: -3,
+                                  intensity: 1,
                                   surfaceIntensity: 1,
-                                  color: Colors.white,
+                                  oppositeShadowLightSource: false,
+                                  color: whiteBg,
                                 ),
                                 child: FormBuilderTextField(
                                   attribute: "password",
@@ -174,46 +175,50 @@ class Tab1Login extends StatelessWidget {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 50),
-                              child: NeumorphicButton(
-                                margin: EdgeInsets.only(top: 40),
-                                boxShape: NeumorphicBoxShape.stadium(),
-                                provideHapticFeedback: true,
-                                onClick: () async {
-                                  navigationService.loginform.currentState
-                                      .save();
-                                  if (navigationService.loginform.currentState
-                                      .validate()) {
-                                    userService.userEmail = navigationService
-                                        .loginform.currentState.value['email'];
-                                    userService.userPassword = navigationService
-                                        .loginform
-                                        .currentState
-                                        .value['password'];
-                                    await userService.userLogin();
-                                  }
-                                },
-                                padding: EdgeInsets.symmetric(vertical: 15),
-                                drawSurfaceAboveChild: true,
-                                style: NeumorphicStyle(
-                                    color: Color(0xFF05848D),
-                                    depth: 3,
-                                    intensity: 1,
-                                    surfaceIntensity: 1,
-                                    lightSource: LightSource.topLeft,
-                                    oppositeShadowLightSource: false),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    userService.isloading == true
-                                        ? CircularProgressIndicator()
-                                        : Text(
-                                            'Conectar',
-                                            style: GoogleFonts.poppins(
-                                                textStyle: TextStyle(
-                                                    color: Colors.white)),
-                                          ),
-                                  ],
+                              const EdgeInsets.symmetric(horizontal: 50),
+                              child: BeloniButton(
+                                width: MediaQuery.of(context).size.width * .6,
+                                height:
+                                MediaQuery.of(context).size.height * .06,
+                                radius:
+                                MediaQuery.of(context).size.height * .03,
+                                child: MaterialButton(
+                                  disabledElevation: 0,
+                                  onPressed: () async {
+                                    if (navigationService
+                                        .loginform.currentState
+                                        .saveAndValidate()) {
+                                      userService.userEmail = navigationService
+                                          .loginform
+                                          .currentState
+                                          .value['email'];
+                                      userService.userPassword =
+                                      navigationService.loginform
+                                          .currentState.value['password'];
+
+                                      await userService.userLogin();
+                                    }
+                                  },
+                                  shape: StadiumBorder(),
+                                  splashColor: Colors.transparent,
+                                  colorBrightness: Brightness.light,
+                                  hoverColor: Colors.transparent,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      userService.isloading == true
+                                          ? Center(
+                                          child: CircularProgressIndicator(
+                                            backgroundColor: whiteBg,
+                                            strokeWidth: 1,
+                                          ))
+                                          : Text(
+                                        'Entrar',
+                                        style: GoogleFonts.poppins(
+                                            color: whiteBg),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
