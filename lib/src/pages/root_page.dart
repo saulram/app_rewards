@@ -1,10 +1,11 @@
+import 'package:apprewards/src/components/bottom_bar.dart';
 import 'package:apprewards/src/pages/views/profile_page.dart';
 import 'package:apprewards/src/pages/views/settings_page.dart';
-import 'package:apprewards/src/pages/views/transaction_page.dart';
+import 'package:apprewards/src/pages/transactions/transaction_page.dart';
 import 'package:apprewards/src/services/main_navigation_service.dart';
 
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class RootPage extends StatelessWidget {
@@ -12,42 +13,35 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainNavigationService = Provider.of<MainNavigationService>(context);
     return Scaffold(
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: mainNavigationService.paginaActual,
-        showElevation: true,
-        itemCornerRadius: 8,
-        curve: Curves.easeInBack,
-        onItemSelected: (index) {
-          mainNavigationService.nuevaPagina = index;
-        },
-        items: [
-          BottomNavyBarItem(
-            icon: Icon(Icons.apps),
-            title: Text('Inicio'),
-            activeColor: Colors.red,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.people_outline),
-            title: Text('Profile'),
-            activeColor: Colors.blue,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('Home'),
-            activeColor: Colors.grey,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-      body: PageView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: mainNavigationService.controller,
+      body: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
-          TransactionPage(),
-          ProfileTab(),
-          SettingsTab()
+          PageView(
+            physics: NeverScrollableScrollPhysics(),
+            controller: mainNavigationService.controller,
+            children: <Widget>[TransactionPage(), ProfileTab(), SettingsTab(),Container(),Container()],
+          ),
+          NavBarBottom(
+            items: [
+              NavItem(
+                icono: Icon(FontAwesomeIcons.user),
+                position: 0,
+              ),
+              NavItem(icono: Icon(FontAwesomeIcons.handshake), position: 1),
+              NavItem(
+                position: 2,
+                icono: Icon(FontAwesomeIcons.percentage),
+              ),
+              NavItem(
+                position: 3,
+                icono: Icon(FontAwesomeIcons.phoneAlt),
+              ),
+              NavItem(
+                position: 4,
+                icono: Icon(FontAwesomeIcons.search),
+              ),
+            ],
+          ),
         ],
       ),
     );

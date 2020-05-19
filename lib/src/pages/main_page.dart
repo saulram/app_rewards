@@ -2,6 +2,7 @@ import 'package:apprewards/src/pages/login_page.dart';
 import 'package:apprewards/src/pages/root_page.dart';
 import 'package:apprewards/src/services/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
@@ -14,7 +15,7 @@ class MainPage extends StatelessWidget {
       if (userService.user.token == null) {
         return Scaffold(
           body: Center(
-            child: CircularProgressIndicator(),
+            child: NeumorphicProgressIndeterminate(),
           ),
         );
       } else {

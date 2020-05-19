@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 class UserService with ChangeNotifier {
   final api = url_api;
 
+  bool _errorLogin = false;
+  bool get errorLogin => _errorLogin;
   UserService() {
     /// Al iniciar la app leera las preferencias de usuario en busca de email y password,
     /// si encuentra un email y un password, intentara hacer login automaticamente.
@@ -68,12 +70,15 @@ class UserService with ChangeNotifier {
 
   //para manejar el mensaje si hay error
   String _message = '';
+  String get  message => _message;
 
   //Inicializar el almacenamiento seguro
   final _storage = FlutterSecureStorage();
 
   /// Servicio para iniciar sesión en el API rest
   userLogin() async {
+    this._message = '';
+    this._errorLogin = false;
     this._isLoadingSignIn = true;
     final req = await http.post('$api/login/',
         headers: <String, String>{
@@ -90,11 +95,15 @@ class UserService with ChangeNotifier {
     } else if (req.statusCode == 404) {
       _user.token = '';
       _message = jsonDecode(req.body)["message"];
+      _errorLogin =true;
       _isLoadingSignIn = false;
+      print(_message);
     } else {
       _user.token = '';
       _message = jsonDecode(req.body)["message"];
       _isLoadingSignIn = false;
+      _errorLogin= true;
+      print(_message);
     }
     notifyListeners();
   }

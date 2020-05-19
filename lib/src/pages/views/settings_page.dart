@@ -1,3 +1,5 @@
+import 'package:apprewards/src/components/beloni_neucard.dart';
+import 'package:apprewards/src/components/beloni_neucircle.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTab extends StatelessWidget {
@@ -7,8 +9,14 @@ class SettingsTab extends StatelessWidget {
       appBar: AppBar(
         title: Text('Settings'),
       ),
+      backgroundColor: Color(0XFFE8F3FB),
       body: Center(
-        child: Text('Work in progress'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+
+          ],
+        ),
       ),
     );
   }
