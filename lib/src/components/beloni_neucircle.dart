@@ -27,10 +27,7 @@ class BeloniCircleContainer extends StatelessWidget {
               spreadRadius: 2)
         ],
       ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaY: 2, sigmaX: 2),
-        child: child,
-      ),
+      child: child,
     );
   }
 }

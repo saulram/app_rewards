@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:apprewards/src/components/beloni_button.dart';
 import 'package:apprewards/src/services/login_navigation_service.dart';
@@ -11,10 +9,8 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Tab1Login extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final userService = Provider.of<UserService>(context);
@@ -108,8 +104,8 @@ class Tab1Login extends StatelessWidget {
                                       alignLabelWithHint: true,
                                       focusedBorder: InputBorder.none,
                                       enabledBorder: InputBorder.none,
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 0),
                                       labelStyle: GoogleFonts.poppins(
                                           color: Colors.grey)),
                                   textInputAction: TextInputAction.done,
@@ -175,26 +171,25 @@ class Tab1Login extends StatelessWidget {
                             ),
                             Container(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 50),
+                                  const EdgeInsets.symmetric(horizontal: 50),
                               child: BeloniButton(
                                 width: MediaQuery.of(context).size.width * .6,
                                 height:
-                                MediaQuery.of(context).size.height * .06,
+                                    MediaQuery.of(context).size.height * .06,
                                 radius:
-                                MediaQuery.of(context).size.height * .03,
+                                    MediaQuery.of(context).size.height * .03,
                                 child: MaterialButton(
                                   disabledElevation: 0,
                                   onPressed: () async {
-                                    if (navigationService
-                                        .loginform.currentState
+                                    if (navigationService.loginform.currentState
                                         .saveAndValidate()) {
                                       userService.userEmail = navigationService
                                           .loginform
                                           .currentState
                                           .value['email'];
                                       userService.userPassword =
-                                      navigationService.loginform
-                                          .currentState.value['password'];
+                                          navigationService.loginform
+                                              .currentState.value['password'];
 
                                       await userService.userLogin();
                                     }
@@ -208,15 +203,15 @@ class Tab1Login extends StatelessWidget {
                                     children: <Widget>[
                                       userService.isloading == true
                                           ? Center(
-                                          child: CircularProgressIndicator(
-                                            backgroundColor: whiteBg,
-                                            strokeWidth: 1,
-                                          ))
+                                              child: CircularProgressIndicator(
+                                              backgroundColor: whiteBg,
+                                              strokeWidth: 1,
+                                            ))
                                           : Text(
-                                        'Entrar',
-                                        style: GoogleFonts.poppins(
-                                            color: whiteBg),
-                                      ),
+                                              'Entrar',
+                                              style: GoogleFonts.poppins(
+                                                  color: whiteBg),
+                                            ),
                                     ],
                                   ),
                                 ),
@@ -230,27 +225,6 @@ class Tab1Login extends StatelessWidget {
                                     fontSize: 15, color: Colors.grey[600]),
                               ),
                             ),
-                            Container(
-                              child: FlatButton(
-                                shape: StadiumBorder(),
-                                onPressed: () async {
-                                  const url = 'https://flutter.dev';
-                                  if (await canLaunch(url)) {
-                                    await launch(url);
-                                  } else {
-                                    throw 'Could not launch $url';
-                                  }
-                                },
-                                child: Text(
-                                  'Obtener ayuda',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 15,
-                                      textStyle: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black)),
-                                ),
-                              ),
-                            )
                           ],
                         ),
                       ),

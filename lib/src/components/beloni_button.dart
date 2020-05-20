@@ -45,28 +45,25 @@ class _BeloniButtonState extends State<BeloniButton> {
               BoxShadow(
                 color: Color(0xff767676),
                 offset: Offset(dx, dy),
-                blurRadius: 6,
+                blurRadius: 2,
               ),
             ],
           ),
           duration: Duration(milliseconds: 10),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-            child: Container(
-              width: widget.width,
-              height: widget.height,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(widget.radius),
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff26c097),
-                    Color(0xff0f4c81),
-                  ],
+          child: Container(
+            width: widget.width,
+            height: widget.height,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(widget.radius),
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xff26c097),
+                  Color(0xff0f4c81),
+                ],
 
-                ),
               ),
-              child: Center(child: widget.child),
             ),
+            child: Center(child: widget.child),
           ),
         ),
       ),

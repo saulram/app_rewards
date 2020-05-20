@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:apprewards/src/services/main_navigation_service.dart';
 import 'package:apprewards/src/theme/theme.dart';
 
@@ -16,39 +18,49 @@ class NavItem extends StatelessWidget {
     final navbarService = Provider.of<MainNavigationService>(context);
     List bridge = navbarService.factorList;
     return Expanded(
-      child: AnimatedContainer(
-        width: MediaQuery.of(context).size.height *
-            navbarService.factorList[this.position],
-        height: MediaQuery.of(context).size.height *
-            navbarService.factorList[this.position],
-        curve: Curves.easeInOut,
-        duration: Duration(milliseconds: 100),
-        child: NeumorphicButton(
-          provideHapticFeedback: true,
-          onClick: () {
-            List prof = navbarService.depthenabled;
-            for (int i = 0; i < bridge.length; i++) {
-              if (i == position) {
-                prof[i] = false;
-                bridge[i] = 0.08;
-              } else {
-                prof[i] = true;
-                bridge[i] = 0.05;
-              }
-              navbarService.depthenabled = prof;
-              navbarService.nuevaPagina = position;
-            }
+      child: ClipRRect(
+        borderRadius:BorderRadius.circular(MediaQuery.of(context).size.height *
+            navbarService.factorList[this.position]) ,
+        child: Container(
+          padding: EdgeInsets.all(5),
+          child: AnimatedContainer(
+            width: MediaQuery.of(context).size.height *
+                navbarService.factorList[this.position],
+            height: MediaQuery.of(context).size.height *
+                navbarService.factorList[this.position],
+            curve: Curves.easeInOut,
+            duration: Duration(milliseconds: 100),
+            child: NeumorphicButton(
+              provideHapticFeedback: true,
+              onClick: () {
+                List prof = navbarService.depthenabled;
+                for (int i = 0; i < bridge.length; i++) {
+                  if (i == position) {
+                    prof[i] = false;
+                    bridge[i] = 0.08;
+                  } else {
+                    prof[i] = true;
+                    bridge[i] = 0.05;
+                  }
+                  navbarService.depthenabled = prof;
+                  navbarService.nuevaPagina = position;
+                }
 
-            navbarService.factorListUpdate = bridge;
-          },
-          boxShape: NeumorphicBoxShape.circle(),
-          style: NeumorphicStyle(
-              color: whiteBg,
-              lightSource: LightSource.topLeft,
-              disableDepth: navbarService.depthenabled[position],
-              shape: NeumorphicShape.flat,
-              depth: 5),
-          child: icono,
+                navbarService.factorListUpdate = bridge;
+              },
+              boxShape: NeumorphicBoxShape.circle(),
+              style: NeumorphicStyle(
+                  color: whiteBg,
+                  lightSource: LightSource.topLeft,
+                  disableDepth: navbarService.depthenabled[position],
+                  shape: NeumorphicShape.convex,
+                  depth: 7),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaY: 2,sigmaX: 2),
+                child: icono,
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -12,13 +12,13 @@ class BeloniCircleContainerPushed extends StatelessWidget {
         BoxShadow(
             color: Color(0xff707070),
             offset: Offset(-9, -3),
-            blurRadius: 6,
+            blurRadius: 2,
             spreadRadius: -2),
         BoxShadow(
             color: Colors.white,
             offset: Offset(3, 6),
-            blurRadius: 6,
-            spreadRadius: -6)
+            blurRadius: 2,
+            spreadRadius: -2)
       ], color: Colors.transparent),
       
     );

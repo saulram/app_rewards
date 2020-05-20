@@ -28,9 +28,9 @@ class TransactionList extends StatelessWidget {
             ? Container()
             : Container(
                 color: whiteBg,
-                child: LiquidPullToRefresh(
+                child: RefreshIndicator(
                   color: Colors.grey[800],
-                  height: 45,
+
                   onRefresh: transactionService.refreshTransactions,
                   backgroundColor: whiteBg,
                   child: ListView.builder(
